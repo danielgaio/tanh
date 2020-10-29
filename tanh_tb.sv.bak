@@ -1,0 +1,261 @@
+`timescale 1ns/1ps
+
+module tanh_tb();
+
+	
+	// data types: inputs as registers and outputs as wires
+	//inputs
+  	reg [15:0] x_tb;
+	//outputs
+  	wire [31:0] y_tb;
+	// test module
+	tanh tanh_DUT (
+		.x(x_tb),
+    	.y(y_tb)
+	);
+
+
+
+
+	// other variables
+	real generated_results [65536:0];
+	shortreal expected_results [65536:0];
+	reg [16:0] i;
+
+
+
+
+	// variaveis da convercao para real
+	reg signed [3:0] inteira;
+	reg [11:0] fracionaria;
+	reg [15:0] tanh_out;
+	int j, expo;
+	shortreal converted, temp, temp2;
+
+
+
+
+	// variaveis do calculo de valor exato e erro
+	// a variavel "passo" gera entradas para sigmoide
+	shortreal passo;
+	int k;
+	shortreal rmse_temp, RMSE, erro_absoluto, max_error;
+	
+
+
+
+
+	
+	
+
+
+
+
+	// stimulus
+  	initial begin
+
+
+
+		// sessao para fazer testes com valores especificos
+		//fork
+			//x_tb = 16'b0001_101100110011; // tanh(1.7) = 0.9354
+			//#150
+			//$display("y_tb: %b", y_tb);
+			
+		//join
+
+
+
+
+
+
+
+		// Convertendo p real os valores gerados pelo DUT e salvando
+		fork
+
+			// gerando todos os valores de teste para o DUT
+			for (i = 17'b0000000000000000; i <= (17'b1111111111111111 + 1); i = i+1) begin
+
+				// injeta sinal no DUT
+				x_tb = i[15:0];
+				$display("x_tb: %b", x_tb);
+
+
+
+				#35
+
+
+
+				// Exibe saida do DUT
+				$display("y_tb: %b", y_tb);
+				
+
+
+				// converter resultado saida DUT para decimal e salva em um vetor
+				
+
+
+				// variaveis auxiliares pra converter pra decimal
+				temp = 0;
+				expo = 1;
+
+
+
+				
+				// pega resultado de saida
+				tanh_out = y_tb;
+
+
+				// extrai parte correspondente
+				inteira = tanh_out[15:12];
+				//$display("inteira: %d", inteira);
+
+
+
+
+				// converter parte fracionaria
+				fracionaria = tanh_out[11:0];
+				//$display("fracionaria: %b", fracionaria);
+
+				
+
+
+				// da esquerda para a direita, ver se o bit Ã© 1, se sim, calcular 2^(posicao do bit) e armazenar
+				// se proximo bit Ã© 1, calcular e somar ao resultado armazenado
+				for (j = 11; j >= 0; j--) begin
+					if (fracionaria[j] == 1)
+						temp += shortreal'(1)/(2**(expo));
+						expo ++;
+						//$display("temp: %f", temp);
+				end
+
+
+				// somar parte inteira e fracionaria
+				if (y_tb[15] == 1'b1)
+					converted = inteira - temp;
+				else
+					converted = inteira + temp;
+
+
+
+				// guarda valor convertido em um vetor
+				generated_results[i] = converted;
+				$display("generated_results[%d]: %f", i, generated_results[i]);
+
+
+
+
+			end
+		join
+		$stop;
+
+
+
+
+		// calculando valor preciso e guardando em expected_results
+		fork
+
+			passo = -7.0;
+
+			// com passo = 0.0002138 sao necessarias 65536 iteracoes para varer [-7,+7]
+			for (k=0; k <= 65536; k ++) begin
+
+				expected_results[k] = 2*(1.0/(1.0+(2.718**(-2*passo))))-1;
+
+				$display("expected_results[%d]: %f", k, expected_results[k]);
+
+				passo += 0.0002138;
+
+			end
+
+
+
+
+			$stop;
+		join
+
+
+
+
+
+		// calcular as diferencas entre valor gerado e valor esperado
+		fork
+
+
+
+			// calculando para o primeiro intervalo
+			j = 0;
+			max_error = 0;
+
+
+
+			for (k = 32768; k <= 65536; k++) begin
+				temp = expected_results[k];
+				temp2 = generated_results[j];
+
+				erro_absoluto += (((temp2 - temp) / temp) < 0) ? -((temp2 - temp) / temp) : ((temp2 - temp) / temp);
+
+				$display("erro_absoluto: %f", erro_absoluto);
+
+				rmse_temp += ((temp - temp2)**2);
+
+				//$display("rmse_temp: %f", rmse_temp);
+				
+				// calculando o erro maximo
+				if ((temp2 - temp) > max_error)
+					max_error = (temp2 - temp);
+
+				j++;
+			end
+
+
+			// calculando para o segundo intervalo
+			j = 65536;
+			for (k = 32768; k >= 0; k--) begin
+				temp = expected_results[k];
+				temp2 = generated_results[j];
+
+				erro_absoluto += (((temp - temp2)) < 0) ? -(temp - temp2) : (temp - temp2);
+
+				$display("erro_absoluto: %f", erro_absoluto);
+
+				rmse_temp += ((temp - temp2)**2);
+
+				//$display("rmse_temp: %f", rmse_temp);
+				
+				// calculando o erro maximo
+				if ((temp2 - temp) > max_error)
+					max_error = (temp2 - temp);
+				
+				j--;
+			end
+
+
+
+
+			rmse_temp /= 65536;
+			// calcular a raiz do erro medio
+			RMSE = rmse_temp**0.5;
+			$display("RMSE: %f", RMSE);
+
+
+
+
+			// exibindo tambem o erro absoluto
+			erro_absoluto /= 65536;
+			$display("Erro absoluto: %f", erro_absoluto);
+			
+
+
+
+			// exibindo o erro maximo
+			$display("Max_error: %f", max_error);
+
+
+
+
+		join
+
+	end
+
+endmodule
