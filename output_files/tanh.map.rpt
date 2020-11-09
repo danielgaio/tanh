@@ -1,5 +1,5 @@
 Analysis & Synthesis report for tanh
-Thu Oct 29 08:09:36 2020
+Mon Nov  9 08:35:50 2020
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -15,11 +15,9 @@ Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
   7. Analysis & Synthesis Resource Utilization by Entity
   8. General Register Statistics
   9. Multiplexer Restructuring Statistics (Restructuring Performed)
- 10. Port Connectivity Checks: "sigmoid:sigmoid_module"
- 11. Post-Synthesis Netlist Statistics for Top Partition
- 12. Elapsed Time Per Partition
- 13. Analysis & Synthesis Messages
- 14. Analysis & Synthesis Suppressed Messages
+ 10. Post-Synthesis Netlist Statistics for Top Partition
+ 11. Elapsed Time Per Partition
+ 12. Analysis & Synthesis Messages
 
 
 
@@ -46,16 +44,16 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Oct 29 08:09:36 2020       ;
+; Analysis & Synthesis Status        ; Successful - Mon Nov  9 08:35:50 2020       ;
 ; Quartus Prime Version              ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
 ; Revision Name                      ; tanh                                        ;
 ; Top-level Entity Name              ; tanh                                        ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 234                                         ;
-;     Total combinational functions  ; 234                                         ;
+; Total logic elements               ; 246                                         ;
+;     Total combinational functions  ; 246                                         ;
 ;     Dedicated logic registers      ; 0                                           ;
 ; Total registers                    ; 0                                           ;
-; Total pins                         ; 48                                          ;
+; Total pins                         ; 32                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0                                           ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
@@ -164,14 +162,13 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                      ;
-+----------------------------------+-----------------+------------------------------+-----------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                  ; Library ;
-+----------------------------------+-----------------+------------------------------+-----------------------------------------------+---------+
-; sigmoid.sv                       ; yes             ; User SystemVerilog HDL File  ; /home/daniel/Documents/GitHub/tanh/sigmoid.sv ;         ;
-; tanh.sv                          ; yes             ; User SystemVerilog HDL File  ; /home/daniel/Documents/GitHub/tanh/tanh.sv    ;         ;
-+----------------------------------+-----------------+------------------------------+-----------------------------------------------+---------+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                   ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path               ; Library ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------+---------+
+; tanh.sv                          ; yes             ; User SystemVerilog HDL File  ; /home/daniel/Documents/GitHub/tanh/tanh.sv ;         ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------+---------+
 
 
 +-----------------------------------------------------------+
@@ -179,41 +176,40 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-------------+
 ; Resource                                    ; Usage       ;
 +---------------------------------------------+-------------+
-; Estimated Total logic elements              ; 234         ;
+; Estimated Total logic elements              ; 246         ;
 ;                                             ;             ;
-; Total combinational functions               ; 234         ;
+; Total combinational functions               ; 246         ;
 ; Logic element usage by number of LUT inputs ;             ;
-;     -- 4 input functions                    ; 167         ;
-;     -- 3 input functions                    ; 49          ;
-;     -- <=2 input functions                  ; 18          ;
+;     -- 4 input functions                    ; 157         ;
+;     -- 3 input functions                    ; 60          ;
+;     -- <=2 input functions                  ; 29          ;
 ;                                             ;             ;
 ; Logic elements by mode                      ;             ;
-;     -- normal mode                          ; 222         ;
-;     -- arithmetic mode                      ; 12          ;
+;     -- normal mode                          ; 217         ;
+;     -- arithmetic mode                      ; 29          ;
 ;                                             ;             ;
 ; Total registers                             ; 0           ;
 ;     -- Dedicated logic registers            ; 0           ;
 ;     -- I/O registers                        ; 0           ;
 ;                                             ;             ;
-; I/O pins                                    ; 48          ;
+; I/O pins                                    ; 32          ;
 ;                                             ;             ;
 ; Embedded Multiplier 9-bit elements          ; 0           ;
 ;                                             ;             ;
-; Maximum fan-out node                        ; x[11]~input ;
-; Maximum fan-out                             ; 62          ;
-; Total fan-out                               ; 917         ;
-; Average fan-out                             ; 2.78        ;
+; Maximum fan-out node                        ; x[15]~input ;
+; Maximum fan-out                             ; 46          ;
+; Total fan-out                               ; 912         ;
+; Average fan-out                             ; 2.94        ;
 +---------------------------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                ;
-+-----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------+-------------+--------------+
-; Compilation Hierarchy Node  ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name          ; Entity Name ; Library Name ;
-+-----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------+-------------+--------------+
-; |tanh                       ; 234 (1)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 48   ; 0            ; |tanh                        ; tanh        ; work         ;
-;    |sigmoid:sigmoid_module| ; 233 (233)           ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |tanh|sigmoid:sigmoid_module ; sigmoid     ; work         ;
-+-----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------+-------------+--------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                      ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------+-------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------+-------------+--------------+
+; |tanh                      ; 246 (246)           ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 32   ; 0            ; |tanh               ; tanh        ; work         ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -232,23 +228,17 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                  ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output        ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------+
-; 41:1               ; 4 bits    ; 108 LEs       ; 108 LEs              ; 0 LEs                  ; No         ; |tanh|sigmoid:sigmoid_module|y[4] ;
-; 44:1               ; 6 bits    ; 174 LEs       ; 174 LEs              ; 0 LEs                  ; No         ; |tanh|sigmoid:sigmoid_module|y[3] ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------+
-
-
-+----------------------------------------------------+
-; Port Connectivity Checks: "sigmoid:sigmoid_module" ;
-+------+-------+----------+--------------------------+
-; Port ; Type  ; Severity ; Details                  ;
-+------+-------+----------+--------------------------+
-; x[0] ; Input ; Info     ; Stuck at GND             ;
-+------+-------+----------+--------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; 17:1               ; 2 bits    ; 22 LEs        ; 14 LEs               ; 8 LEs                  ; No         ; |tanh|y_if[10]             ;
+; 26:1               ; 2 bits    ; 34 LEs        ; 34 LEs               ; 0 LEs                  ; No         ; |tanh|y_if[5]              ;
+; 27:1               ; 2 bits    ; 36 LEs        ; 36 LEs               ; 0 LEs                  ; No         ; |tanh|y_if[4]              ;
+; 28:1               ; 2 bits    ; 36 LEs        ; 36 LEs               ; 0 LEs                  ; No         ; |tanh|y_if[6]              ;
+; 30:1               ; 2 bits    ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |tanh|y_if[7]              ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
 
 
 +-----------------------------------------------------+
@@ -256,20 +246,19 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 48                          ;
-; cycloneiii_lcell_comb ; 237                         ;
-;     arith             ; 12                          ;
-;         2 data inputs ; 1                           ;
-;         3 data inputs ; 11                          ;
-;     normal            ; 225                         ;
-;         0 data inputs ; 1                           ;
-;         1 data inputs ; 3                           ;
+; boundary_port         ; 32                          ;
+; cycloneiii_lcell_comb ; 246                         ;
+;     arith             ; 29                          ;
 ;         2 data inputs ; 16                          ;
-;         3 data inputs ; 38                          ;
-;         4 data inputs ; 167                         ;
+;         3 data inputs ; 13                          ;
+;     normal            ; 217                         ;
+;         1 data inputs ; 2                           ;
+;         2 data inputs ; 11                          ;
+;         3 data inputs ; 47                          ;
+;         4 data inputs ; 157                         ;
 ;                       ;                             ;
-; Max LUT depth         ; 12.00                       ;
-; Average LUT depth     ; 8.87                        ;
+; Max LUT depth         ; 16.20                       ;
+; Average LUT depth     ; 14.88                       ;
 +-----------------------+-----------------------------+
 
 
@@ -278,7 +267,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:02     ;
+; Top            ; 00:00:05     ;
 +----------------+--------------+
 
 
@@ -288,55 +277,26 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
-    Info: Processing started: Thu Oct 29 08:09:27 2020
+    Info: Processing started: Mon Nov  9 08:35:37 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off tanh -c tanh
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
-Info (12021): Found 1 design units, including 1 entities, in source file sigmoid.sv
-    Info (12023): Found entity 1: sigmoid File: /home/daniel/Documents/GitHub/tanh/sigmoid.sv Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file tanh.sv
-    Info (12023): Found entity 1: tanh File: /home/daniel/Documents/GitHub/tanh/tanh.sv Line: 11
+    Info (12023): Found entity 1: tanh File: /home/daniel/Documents/GitHub/tanh/tanh.sv Line: 18
 Info (12021): Found 1 design units, including 1 entities, in source file tanh_tb.sv
     Info (12023): Found entity 1: tanh_tb File: /home/daniel/Documents/GitHub/tanh/tanh_tb.sv Line: 3
-Info (12021): Found 1 design units, including 1 entities, in source file booth_mult.sv
-    Info (12023): Found entity 1: booth_mult File: /home/daniel/Documents/GitHub/tanh/booth_mult.sv Line: 6
 Info (12127): Elaborating entity "tanh" for the top level hierarchy
-Info (12128): Elaborating entity "sigmoid" for hierarchy "sigmoid:sigmoid_module" File: /home/daniel/Documents/GitHub/tanh/tanh.sv Line: 24
-Warning (10230): Verilog HDL assignment warning at sigmoid.sv(17): truncated value with size 32 to match size of target (16) File: /home/daniel/Documents/GitHub/tanh/sigmoid.sv Line: 17
-Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "y[0]" is stuck at GND File: /home/daniel/Documents/GitHub/tanh/tanh.sv Line: 13
-    Warning (13410): Pin "y[1]" is stuck at GND File: /home/daniel/Documents/GitHub/tanh/tanh.sv Line: 13
-    Warning (13410): Pin "y[2]" is stuck at GND File: /home/daniel/Documents/GitHub/tanh/tanh.sv Line: 13
-    Warning (13410): Pin "y[3]" is stuck at GND File: /home/daniel/Documents/GitHub/tanh/tanh.sv Line: 13
-    Warning (13410): Pin "y[4]" is stuck at GND File: /home/daniel/Documents/GitHub/tanh/tanh.sv Line: 13
-    Warning (13410): Pin "y[5]" is stuck at GND File: /home/daniel/Documents/GitHub/tanh/tanh.sv Line: 13
-    Warning (13410): Pin "y[6]" is stuck at GND File: /home/daniel/Documents/GitHub/tanh/tanh.sv Line: 13
-    Warning (13410): Pin "y[7]" is stuck at GND File: /home/daniel/Documents/GitHub/tanh/tanh.sv Line: 13
-    Warning (13410): Pin "y[8]" is stuck at GND File: /home/daniel/Documents/GitHub/tanh/tanh.sv Line: 13
-    Warning (13410): Pin "y[9]" is stuck at GND File: /home/daniel/Documents/GitHub/tanh/tanh.sv Line: 13
-    Warning (13410): Pin "y[10]" is stuck at GND File: /home/daniel/Documents/GitHub/tanh/tanh.sv Line: 13
-    Warning (13410): Pin "y[11]" is stuck at GND File: /home/daniel/Documents/GitHub/tanh/tanh.sv Line: 13
-    Warning (13410): Pin "y[12]" is stuck at GND File: /home/daniel/Documents/GitHub/tanh/tanh.sv Line: 13
 Info (286030): Timing-Driven Synthesis is running
-Info (144001): Generated suppressed messages file /home/daniel/Documents/GitHub/tanh/output_files/tanh.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 1 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "x[15]" File: /home/daniel/Documents/GitHub/tanh/tanh.sv Line: 12
-Info (21057): Implemented 282 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 278 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 16 input pins
-    Info (21059): Implemented 32 output pins
-    Info (21061): Implemented 234 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 18 warnings
-    Info: Peak virtual memory: 398 megabytes
-    Info: Processing ended: Thu Oct 29 08:09:36 2020
-    Info: Elapsed time: 00:00:09
-    Info: Total CPU time (on all processors): 00:00:20
-
-
-+------------------------------------------+
-; Analysis & Synthesis Suppressed Messages ;
-+------------------------------------------+
-The suppressed messages can be found in /home/daniel/Documents/GitHub/tanh/output_files/tanh.map.smsg.
+    Info (21059): Implemented 16 output pins
+    Info (21061): Implemented 246 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
+    Info: Peak virtual memory: 391 megabytes
+    Info: Processing ended: Mon Nov  9 08:35:50 2020
+    Info: Elapsed time: 00:00:13
+    Info: Total CPU time (on all processors): 00:00:24
 
 

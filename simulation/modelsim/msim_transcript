@@ -9,25 +9,15 @@
 # Copying /home/daniel/intelFPGA/20.1/modelsim_ase/linuxaloem/../modelsim.ini to modelsim.ini
 # Modifying modelsim.ini
 # 
-# vlog -sv -work work +incdir+/home/daniel/Documents/GitHub/tanh {/home/daniel/Documents/GitHub/tanh/sigmoid.sv}
-# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 08:10:07 on Oct 29,2020
-# vlog -reportprogress 300 -sv -work work "+incdir+/home/daniel/Documents/GitHub/tanh" /home/daniel/Documents/GitHub/tanh/sigmoid.sv 
-# -- Compiling module sigmoid
-# 
-# Top level modules:
-# 	sigmoid
-# End time: 08:10:08 on Oct 29,2020, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+/home/daniel/Documents/GitHub/tanh {/home/daniel/Documents/GitHub/tanh/tanh.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 08:10:08 on Oct 29,2020
+# Start time: 08:36:18 on Nov 09,2020
 # vlog -reportprogress 300 -sv -work work "+incdir+/home/daniel/Documents/GitHub/tanh" /home/daniel/Documents/GitHub/tanh/tanh.sv 
 # -- Compiling module tanh
 # 
 # Top level modules:
 # 	tanh
-# End time: 08:10:08 on Oct 29,2020, Elapsed time: 0:00:00
+# End time: 08:36:18 on Nov 09,2020, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
 # 

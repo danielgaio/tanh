@@ -6,92 +6,146 @@
 // Formato de representaçao: Q4.12
 // --------------------------------------------------------------------------------------------
 
-`timescale 1ns/1ps
-
-module tanh(x, y);
-	input wire signed [15:0] x;
-	output reg signed [31:0] y;
-	
 
 
-	// variables for the sigmoid module
-	reg [15:0] x_sigmoid;
-	reg [15:0] y_sigmoid;
-	// declare sigmoid module
-	sigmoid sigmoid_module(
-		.x(x_sigmoid),
-		.y(y_sigmoid)
-	);
+// ###### STATUS: Fazer a parte do complemento, acho que vou ter que ver se a entrada é negativa,
+// sendo ou não, pego ela e coloco em outro sinal, que por sua vez vai ser analizado pela estrutura de ifs
 
 
 
+`timescale 1ns / 1ps
 
-	
-
-
-
-
-
-
-
-	// other variables
-	logic [31:0] two_times_x;
-	logic [31:0] two_times_sig;
-
-
-
-
+module tanh (input reg [15:0] x, output reg [15:0] y);
 	
 	
 	
+	
+	reg [15:0]x_if;
+	
+	reg [15:0]y_if;
+	
+
 
 	always @ (*) begin
+		// Se é negativo, fazer complemento
+		if (x[15] == 1'b1)
+			x_if <= (~x) + 1'b1;
+		else
+			x_if <= x;
+
+		//$display("x_if: %b", x_if);
+	end
 	
-
-
-
-		// multiplicacao 2*x
-		two_times_x <= 16'b0010_000000000000 * x;
-		#5
-		//$display("two_times_x: %b", two_times_x);
-		
-
-
-
-
-
-		// sig(2*x)
-		x_sigmoid = two_times_x[27:12];
-		#20
-		//$display("y_sigmoid: %b", y_sigmoid);
-		
 	
+	always @ (*) begin
+
+			
+			if (x_if == 16'b0000_000000000000)												//if (x_if == 0)
+				y_if <= 16'b0000_000000000000;
+
+			// Valores de entrada positivos
+			
+			else if ((x_if > 16'b0000_000000000000) && (x_if <= 16'b0000_000011110110))		// if (x_if > 0 && x_if <= 0.06)
+				y_if <= 16'b0000_000011110101;	// Esse valor de saida corresponde a entrada 0.06, isso será pdrão nas próximas saidas
+
+			else if ((x_if > 16'b0000_000011110110) && (x_if <= 16'b0000_000111101100))		// if (x_if > 0.06 && x_if <= 0.12)
+				y_if <= 16'b0000_000111101001;
+
+			else if ((x_if > 16'b0000_000111101100) && (x_if <= 16'b0000_001011100001))		// if (x_if > 0.12 && x_if <= 0.18)
+				y_if <= 16'b0000_001011011001;
+
+			else if ((x_if > 16'b0000_001011100001) && (x_if <= 16'b0000_010000000000))		// if (x_if > 0.18 && x_if <= 0.25)
+				y_if <= 16'b0000_001111101011;
+
+			else if ((x_if > 16'b0000_010000000000) && (x_if <= 16'b0000_010011110110))		// if (x_if > 0.25 && x_if <= 0.31)
+				y_if <= 16'b0000_010011001111;
+
+			else if ((x_if > 16'b0000_010011110110) && (x_if <= 16'b0000_010111101100))		// if (x_if > 0.31 && x_if <= 0.37)
+				y_if <= 16'b0000_010110101010;
+
+			else if ((x_if > 16'b0000_010111101100) && (x_if <= 16'b0000_011011100001))		// if (x_if > 0.37 && x_if <= 0.43)
+				y_if <= 16'b0000_011001111100;
+
+			else if ((x_if > 16'b0000_011011100001) && (x_if <= 16'b0000_100000000000))		// if (x_if > 0.43 && x_if <= 0.5)
+				y_if <= 16'b0000_011101100101;
+
+			else if ((x_if > 16'b0000_100000000000) && (x_if <= 16'b0000_100011110110))		// if (x_if > 0.5 && x_if <= 0.56)
+				y_if <= 16'b0000_100000100001;
+
+			else if ((x_if > 16'b0000_100011110110) && (x_if <= 16'b0000_100111101100))		// if (x_if > 0.56 && x_if <= 0.62)
+				y_if <= 16'b0000_100011010001;
+
+			else if ((x_if > 16'b0000_100111101100) && (x_if <= 16'b0000_101011100001))		// if (x_if > 0.62 && x_if <= 0.68)
+				y_if <= 16'b0000_100101110111;
+
+			else if ((x_if > 16'b0000_101011100001) && (x_if <= 16'b0000_110000000000))		// if (x_if > 0.68 && x_if <= 0.75)
+				y_if <= 16'b0000_101000101010;
+
+			else if ((x_if > 16'b0000_110000000000) && (x_if <= 16'b0000_110011110110))		// if (x_if > 0.75 && x_if <= 0.81)
+				y_if <= 16'b0000_101010110111;
+
+			else if ((x_if > 16'b0000_110011110110) && (x_if <= 16'b0000_110111101100))		// if (x_if > 0.81 && x_if <= 0.87)
+				y_if <= 16'b0000_101100111001;
+
+			else if ((x_if > 16'b0000_110111101100) && (x_if <= 16'b0000_111011100001))		// if (x_if > 0.87 && x_if <= 0.93)
+				y_if <= 16'b0000_101110110000;
+
+			else if ((x_if > 16'b0000_111011100001) && (x_if <= 16'b0001_000000000000))		// if (x_if > 0.93 && x_if <= 1)
+				y_if <= 16'b0000_110000101111;
+
+			else if ((x_if > 16'b0001_000000000000) && (x_if <= 16'b0001_000011110110))		// if (x_if > 1 && x_if <= 1.06)
+				y_if <= 16'b0000_110010010010;
+
+			else if ((x_if > 16'b0001_000011110110) && (x_if <= 16'b0001_000111101100))		// if (x_if > 1.06 && x_if <= 1.12)
+				y_if <= 16'b0000_110011101100;
+
+			else if ((x_if > 16'b0001_000111101100) && (x_if <= 16'b0001_001011100001))		// if (x_if > 1.12 && x_if <= 1.18)
+				y_if <= 16'b0000_110100111101;
+
+			else if ((x_if > 16'b0001_001011100001) && (x_if <= 16'b0001_010000000000))		// if (x_if > 1.18 && x_if <= 1.25)
+				y_if <= 16'b0000_110110010011;
+
+			else if ((x_if > 16'b0001_010000000000) && (x_if <= 16'b0001_010011110110))		// if (x_if > 1.25 && x_if <= 1.31)
+				y_if <= 16'b0000_110111010100;
+
+			else if ((x_if > 16'b0001_010011110110) && (x_if <= 16'b0001_010111101100))		// if (x_if > 1.31 && x_if <= 1.37)
+				y_if <= 16'b0000_111000001111;
+
+			else if ((x_if > 16'b0001_010111101100) && (x_if <= 16'b0001_011011100001))		// if (x_if > 1.37 && x_if <= 1.43)
+				y_if <= 16'b0000_111001000100;
+
+			else if ((x_if > 16'b0001_011011100001) && (x_if <= 16'b0001_100000000000))		// if (x_if > 1.43 && x_if <= 1.5)
+				y_if <= 16'b0000_111001111011;
+
+			else if ((x_if > 16'b0001_100000000000) && (x_if <= 16'b0001_100111101100))		// if (x_if > 1.5 && x_if <= 1.62)
+				y_if <= 16'b0000_111011001011;
+
+			else if ((x_if > 16'b0001_100111101100) && (x_if <= 16'b0001_110000000000))		// if (x_if > 1.62 && x_if <= 1.75)
+				y_if <= 16'b0000_111100010000;
+
+			else if ((x_if > 16'b0001_110000000000) && (x_if <= 16'b0001_110111101100))		// if (x_if > 1.75 && x_if <= 1.87)
+				y_if <= 16'b0000_111101000010;
+
+			else if ((x_if > 16'b0001_110111101100) && (x_if <= 16'b0010_000000000000))		// if (x_if > 1.87 && x_if <= 2)
+				y_if <= 16'b0000_111101101101;
+
+			else if ((x_if > 16'b0010_000000000000) && (x_if <= 16'b0010_100000000000))		// if (x_if > 2 && x_if <= 2.5)
+				y_if <= 16'b0000_111111001001;
+
+			else if ((x_if > 16'b0010_100000000000) && (x_if <= 16'b0011_000000000000))		// if (x_if > 2.5 && x_if <= 3)
+				y_if <= 16'b0000_111111101100;
+
+			else																			// if (x_if > 3)
+				y_if <= 16'b0001_000000000000;
 
 
 
-		
+			// Se entrada tiver sido negativa tem que complementar a saida
+			if (x[15] == 1'b1)
+				y <= (~y_if) + 1'b1;
+			else
+				y <= y_if;
 
-
-		// 2 * sig(2x)
-		two_times_sig = 16'b0010_000000000000 * y_sigmoid;
-		#5
-		//$display("two_times_sig: %b", two_times_sig);
-	
-
-
-
-
-
-	
-		// 2 * sig(2x) - 1
-		y = two_times_sig - 32'b00000001_000000000000000000000000;
-		//$display("y tanh: %b", y);
-		
-		
-		
-		
-		
-	
 	end
 	
 endmodule

@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Thu Oct 29 08:09:36 2020
+Analysis & Synthesis Status : Successful - Mon Nov  9 08:35:50 2020
 Quartus Prime Version : 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 Revision Name : tanh
 Top-level Entity Name : tanh
 Family : Cyclone IV E
-Total logic elements : 234
-    Total combinational functions : 234
+Total logic elements : 246
+    Total combinational functions : 246
     Dedicated logic registers : 0
 Total registers : 0
-Total pins : 48
+Total pins : 32
 Total virtual pins : 0
 Total memory bits : 0
 Embedded Multiplier 9-bit elements : 0

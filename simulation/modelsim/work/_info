@@ -9,95 +9,45 @@ z2
 !i10f 100
 cModel Technology
 Z0 d/home/daniel/Documents/GitHub/tanh/simulation/modelsim
-vbooth_mult
+vtanh
 Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-Z2 !s110 1603977687
+Z2 !s110 1604924227
 !i10b 1
-!s100 6OXFA[?bGzdz2<aa_CNeH1
+!s100 f[4zKl1n[K91e_oYQ31h;0
 Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
-I_aCbQWKM^a3Zef5<Bk_0J0
+I^X6ZLY97_O>H[2j2D;XKg3
 Z4 VDg1SIo80bB@j0V0VzS_@n1
 S1
 R0
-w1603894517
-8/home/daniel/Documents/GitHub/tanh/booth_mult.sv
-F/home/daniel/Documents/GitHub/tanh/booth_mult.sv
-!i122 249
-L0 6 50
+w1604705827
+8/home/daniel/Documents/GitHub/tanh/tanh.sv
+F/home/daniel/Documents/GitHub/tanh/tanh.sv
+!i122 297
+L0 18 134
 Z5 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z6 !s108 1603977687.000000
-!s107 /home/daniel/Documents/GitHub/tanh/booth_mult.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|/home/daniel/Documents/GitHub/tanh/booth_mult.sv|
-!i113 1
-Z7 o-work work -sv
-Z8 tCvgOpt 0
-vsigmoid
-R1
-R2
-!i10b 1
-!s100 Pn]O23eWf;:C`R^lLGXKm3
-R3
-Io16oV=nUUSGoQzi0@ao380
-R4
-S1
-R0
-w1601335834
-8/home/daniel/Documents/GitHub/tanh/sigmoid.sv
-F/home/daniel/Documents/GitHub/tanh/sigmoid.sv
-!i122 248
-L0 3 164
-R5
-r1
-!s85 0
-31
-R6
-!s107 /home/daniel/Documents/GitHub/tanh/sigmoid.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|/home/daniel/Documents/GitHub/tanh/sigmoid.sv|
-!i113 1
-R7
-R8
-vtanh
-R1
-R2
-!i10b 1
-!s100 OKAD:2D5f2D=R0C@C<J2W3
-R3
-I`3aIoGVN4WIC<ZBJCD6Vg1
-R4
-S1
-R0
-w1603972051
-8/home/daniel/Documents/GitHub/tanh/tanh.sv
-F/home/daniel/Documents/GitHub/tanh/tanh.sv
-!i122 246
-L0 11 87
-R5
-r1
-!s85 0
-31
-R6
+Z6 !s108 1604924227.000000
 !s107 /home/daniel/Documents/GitHub/tanh/tanh.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|/home/daniel/Documents/GitHub/tanh/tanh.sv|
 !i113 1
-R7
-R8
+Z7 o-work work -sv
+Z8 tCvgOpt 0
 vtanh_tb
 R1
 R2
 !i10b 1
-!s100 GO7[a469oiZ>mEebK?iK>3
+!s100 KbW```Fh[z_e_9a9d8G?a3
 R3
-I;Ta:^3LgmXOQoP<TQl:AP2
+InnnncEnLc8HU6igbcic2c0
 R4
 S1
 R0
-w1603977620
+w1604922977
 8/home/daniel/Documents/GitHub/tanh/tanh_tb.sv
 F/home/daniel/Documents/GitHub/tanh/tanh_tb.sv
-!i122 247
+!i122 298
 L0 3 277
 R5
 r1

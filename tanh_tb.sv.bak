@@ -7,7 +7,7 @@ module tanh_tb();
 	//inputs
   	reg [15:0] x_tb;
 	//outputs
-  	wire [31:0] y_tb;
+  	wire [15:0] y_tb;
 	// test module
 	tanh tanh_DUT (
 		.x(x_tb),
@@ -36,7 +36,7 @@ module tanh_tb();
 
 
 	// variaveis do calculo de valor exato e erro
-	// a variavel "passo" gera entradas para sigmoide
+	// a variavel "passo" gera entradas para o modulo
 	shortreal passo;
 	int k;
 	shortreal rmse_temp, RMSE, erro_absoluto, max_error;
@@ -59,11 +59,14 @@ module tanh_tb();
 		// sessao para fazer testes com valores especificos
 		//fork
 			//x_tb = 16'b0001_101100110011; // tanh(1.7) = 0.9354
-			//#150
+			//#35
+			//$display("y_tb: %b", y_tb);
+			//x_tb = 16'b1001_101100110011; // tanh(1.7) = 0.9354
+			//#35
 			//$display("y_tb: %b", y_tb);
 			
 		//join
-
+		//$stop;
 
 
 
@@ -74,7 +77,9 @@ module tanh_tb();
 		fork
 
 			// gerando todos os valores de teste para o DUT
-			for (i = 17'b0000000000000000; i <= (17'b1111111111111111 + 1); i = i+1) begin
+			for (i = 17'b0000_000000000000; i <= (17'b1111_111111111111); i = i+1) begin
+
+
 
 				// injeta sinal no DUT
 				x_tb = i[15:0];
@@ -95,20 +100,13 @@ module tanh_tb();
 				
 
 
-				// variaveis auxiliares pra converter pra decimal
-				temp = 0;
-				expo = 1;
-
-
+				
 
 				
 				// pega resultado de saida
 				tanh_out = y_tb;
 
 
-				// extrai parte correspondente
-				inteira = tanh_out[15:12];
-				//$display("inteira: %d", inteira);
 
 
 
@@ -120,8 +118,25 @@ module tanh_tb();
 				
 
 
-				// da esquerda para a direita, ver se o bit Ã© 1, se sim, calcular 2^(posicao do bit) e armazenar
-				// se proximo bit Ã© 1, calcular e somar ao resultado armazenado
+				// conversao parte inteira
+				inteira = 0;
+				if (tanh_out[15] == 1'b1)
+					inteira = -8;
+				for (j = 14; j >= 12; j--) begin
+
+					if (tanh_out[j] == 1) begin
+						inteira += 2**(j-12);
+					end
+				end
+				
+
+
+
+
+
+				temp = 0;
+				expo = 1;
+				// conversao parte fracionaria
 				for (j = 11; j >= 0; j--) begin
 					if (fracionaria[j] == 1)
 						temp += shortreal'(1)/(2**(expo));
@@ -130,11 +145,14 @@ module tanh_tb();
 				end
 
 
+
+
+
 				// somar parte inteira e fracionaria
-				if (y_tb[15] == 1'b1)
-					converted = inteira - temp;
-				else
-					converted = inteira + temp;
+				converted = inteira + temp;
+
+
+
 
 
 

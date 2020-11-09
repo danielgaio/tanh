@@ -7,7 +7,7 @@ module tanh_tb();
 	//inputs
   	reg [15:0] x_tb;
 	//outputs
-  	wire [31:0] y_tb;
+  	wire [15:0] y_tb;
 	// test module
 	tanh tanh_DUT (
 		.x(x_tb),
@@ -36,7 +36,7 @@ module tanh_tb();
 
 
 	// variaveis do calculo de valor exato e erro
-	// a variavel "passo" gera entradas para sigmoide
+	// a variavel "passo" gera entradas para o modulo
 	shortreal passo;
 	int k;
 	shortreal rmse_temp, RMSE, erro_absoluto, max_error;
@@ -59,11 +59,14 @@ module tanh_tb();
 		// sessao para fazer testes com valores especificos
 		//fork
 			//x_tb = 16'b0001_101100110011; // tanh(1.7) = 0.9354
-			//#150
+			//#35
+			//$display("y_tb: %b", y_tb);
+			//x_tb = 16'b1001_101100110011; // tanh(1.7) = 0.9354
+			//#35
 			//$display("y_tb: %b", y_tb);
 			
 		//join
-
+		//$stop;
 
 
 
@@ -74,7 +77,7 @@ module tanh_tb();
 		fork
 
 			// gerando todos os valores de teste para o DUT
-			for (i = 17'b0000000000000000; i <= (17'b1111111111111111 + 1); i = i+1) begin
+			for (i = 17'b0000_000000000000; i <= (17'b1111_111111111111); i = i+1) begin
 
 
 
@@ -98,9 +101,6 @@ module tanh_tb();
 
 
 				
-				
-
-
 
 				
 				// pega resultado de saida
@@ -119,16 +119,16 @@ module tanh_tb();
 
 
 				// conversao parte inteira
-				if (tanh_out[15] == 'b1)
+				inteira = 0;
+				if (tanh_out[15] == 1'b1)
 					inteira = -8;
-				else begin
-					inteira = 0;
-					for (j = 14; j >= 12; j--) begin
-						if (tanh_out[j] == 1) begin
-							inteira += 2**j;
-						end
+				for (j = 14; j >= 12; j--) begin
+
+					if (tanh_out[j] == 1) begin
+						inteira += 2**(j-12);
 					end
 				end
+				
 
 
 
@@ -173,16 +173,16 @@ module tanh_tb();
 		// calculando valor preciso e guardando em expected_results
 		fork
 
-			passo = -7.0;
+			passo = -3.0;
 
-			// com passo = 0.0002138 sao necessarias 65536 iteracoes para varer [-7,+7]
+			// com passo = 0.00009155 sao necessarias 65536 iteracoes para varer [-3,+3]
 			for (k=0; k <= 65536; k ++) begin
 
 				expected_results[k] = 2*(1.0/(1.0+(2.718**(-2*passo))))-1;
 
 				$display("expected_results[%d]: %f", k, expected_results[k]);
 
-				passo += 0.0002138;
+				passo += 0.00009155;
 
 			end
 

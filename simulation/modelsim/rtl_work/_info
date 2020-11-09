@@ -9,55 +9,29 @@ z2
 !i10f 100
 cModel Technology
 Z0 d/home/daniel/Documents/GitHub/tanh/simulation/modelsim
-vsigmoid
-Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-Z2 !s110 1603969808
-!i10b 1
-!s100 Pn]O23eWf;:C`R^lLGXKm3
-Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
-Id:k]ClK6N@akBe?8h=95k0
-Z4 VDg1SIo80bB@j0V0VzS_@n1
-S1
-R0
-w1601335834
-8/home/daniel/Documents/GitHub/tanh/sigmoid.sv
-F/home/daniel/Documents/GitHub/tanh/sigmoid.sv
-!i122 0
-L0 3 164
-Z5 OV;L;2020.1;71
-r1
-!s85 0
-31
-!s108 1603969807.000000
-!s107 /home/daniel/Documents/GitHub/tanh/sigmoid.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+/home/daniel/Documents/GitHub/tanh|/home/daniel/Documents/GitHub/tanh/sigmoid.sv|
-!i113 1
-Z6 o-sv -work work
-Z7 !s92 -sv -work work +incdir+/home/daniel/Documents/GitHub/tanh
-Z8 tCvgOpt 0
 vtanh
-R1
-R2
+DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+!s110 1604921778
 !i10b 1
-!s100 l<QfO:AR1d5X8HTk_HzMl1
-R3
-IEezK0^5lc_G_2eJ;of5f_3
-R4
+!s100 f[4zKl1n[K91e_oYQ31h;0
+!s11b Dg1SIo80bB@j0V0VzS_@n1
+IhV72;Wb69bkdJHdXEd[PI3
+VDg1SIo80bB@j0V0VzS_@n1
 S1
 R0
-w1603895382
+w1604705827
 8/home/daniel/Documents/GitHub/tanh/tanh.sv
 F/home/daniel/Documents/GitHub/tanh/tanh.sv
-!i122 1
-L0 11 87
-R5
+!i122 0
+L0 18 134
+OV;L;2020.1;71
 r1
 !s85 0
 31
-!s108 1603969808.000000
+!s108 1604921778.000000
 !s107 /home/daniel/Documents/GitHub/tanh/tanh.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+/home/daniel/Documents/GitHub/tanh|/home/daniel/Documents/GitHub/tanh/tanh.sv|
 !i113 1
-R6
-R7
-R8
+o-sv -work work
+!s92 -sv -work work +incdir+/home/daniel/Documents/GitHub/tanh
+tCvgOpt 0
